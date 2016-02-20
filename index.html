@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+  <head>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    <script type="text/javascript" src="./fancybox/jquery.fancybox.pack.js"></script>
+    <link rel="stylesheet" type="text/css" href="./fancybox/jquery.fancybox.css" media="screen" />
+    <script type="text/javascript" src="./twentytwenty/jquery.twentytwenty.js"></script>
+    <script type="text/javascript" src="./twentytwenty/jquery.event.move.js"></script>
+    <link rel="stylesheet" type="text/css" href="./twentytwenty/twentytwenty.css" media="screen" />
+  </head>
+  <body>
+    <h2>Fancybox w/TwentyTwenty</h2>
+    
+    <a href="#" class="fancybox-matte-painting-link" data-fancybox-href="1">Open Fancybox</a>
+
+    
+    <div class="fancybox-wrapper">
+      <div class="fancybox-wrapper-target"  id="matte-painting-1" style="display:none;">
+        <div class="fancybox-matte-painting twentytwenty" style="width:300px;min-height: 200px;">
+          <img src="//placehold.it/300x200/3498db/ffffff?text=BEFORE" width="300" height="200"/>
+          <img src="//placehold.it/300x200/e74c3c/ffffff?text=AFTER" width="300" height="200"/> 
+        </div>
+      </div>
+    </div>
+
+
+    <script>
+      $(window).load(function() {
+        $("a.fancybox-matte-painting-link").each(function () {
+            var target = $("#matte-painting-" + $(this).data("fancybox-href"));
+            $(this).fancybox({
+              href: "#" + target.attr("id"),
+              afterLoad: function () {
+                // This will ensure that slider dimensions are calculated correctly.
+                // However in this example everything appears to work without this hack.
+                $(window).trigger("resize");
+              }
+            });
+        });
+        $(".twentytwenty").twentytwenty({default_offset_pct: 0.2});
+      });
+    </script>
+  </body>
+</html>
